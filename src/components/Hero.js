@@ -5,12 +5,32 @@ import heroBcg from '../assets/hero-bcg.jpeg'
 import heroBcg2 from '../assets/hero-bcg-2.jpeg'
 
 const Hero = () => {
-  return <h4>hero</h4>
+  return <Wrapper>
+    <article className='content'>
+      <h1>Connect  <br />
+      And Inspire
+      </h1>
+      <p>
+      Officiis iure rerum voluptates a cumque velit 
+quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
+fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
+consequuntur! 
+      </p>
+      <Link to='./products' className="btn hero-btn">
+        Listen Now
+      </Link>
+      </article> 
+      <article className='img-container'>
+        <img src={heroBcg} alt="nice table" className='main-img'/>
+        <img src={heroBcg2} alt="person working" className='accent-img'/>
+      </article>
+  </Wrapper>
 }
 
 const Wrapper = styled.section`
   min-height: 60vh;
   display: grid;
+  padding: 25px;
   place-items: center;
   .img-container {
     display: none;
@@ -25,6 +45,7 @@ const Wrapper = styled.section`
   }
   @media (min-width: 992px) {
     height: calc(100vh - 5rem);
+    padding: 10px;
     grid-template-columns: 1fr 1fr;
     gap: 8rem;
     h1 {
