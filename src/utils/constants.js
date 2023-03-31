@@ -13,7 +13,7 @@ export const links = [
   },
   {
     id: 3,
-    text: 'products',
+    text: 'podcasts',
     url: '/products',
   },
 ]
