@@ -14,7 +14,6 @@ const FeaturedProducts = () => {
 if(error) {
   return <Error />
 }
-
   return (
   <Wrapper className='section'> 
     <div className="title">
@@ -23,6 +22,7 @@ if(error) {
     </div>
     <div className='section-center featured'>
       {featured.slice(0,3).map((product) => {
+        console.log(product)
         return <Product key={product.id} {...product} />
       })}
     </div>
