@@ -15,7 +15,63 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const SingleProductPage = () => {
-  return <h4>Single product page</h4>
+  const {id} = useParams()
+  const history = useHistory()
+  const {
+    single_product_loading: loading,
+    single_product_error: error,
+    single_product: product,
+    fetchSingleProduct,
+  } = useProductsContext();
+
+  useEffect(() => {
+    fetchSingleProduct(`${url}${id}`);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  useEffect(() => {
+    if(error) {
+      setTimeout(() => {
+        history.push('/')
+      }, 5000)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error])
+
+  if (loading) return <Loading />
+  if (error) return <Error />
+  const {name, price, description, stock, stars, reviews, id: sku, company, images} = product
+  
+  return <Wrapper>
+    <PageHero title={name} />
+    <div className="section section-center page">
+      <Link to="/products" className="btn">Back to podcasts</Link>
+      <div className='product-center'>
+        <ProductImages images={images} />
+        
+        <section className='content'>
+          <h2>{name}</h2>
+          <Stars stars={stars} reviews={reviews} />
+          <h5 className='price'>{formatPrice(price)}</h5>
+          <p className='desc'>{description}</p>
+          <p className='info'>
+            <span>Available: </span>
+            {stock > 0 ? "in stock" : 'out of stock'}
+          </p>
+          <p className='info'>
+            <span>SKU: </span>
+            {sku}
+          </p>
+          <p className='info'>
+            <span>Brand: </span>
+            {company}
+          </p>
+          <hr className='linehr'/>
+          {stock > 0 && <AddToCart product={product} />}
+        </section>
+      </div>
+    </div>
+  </Wrapper>
 }
 
 const Wrapper = styled.main`
@@ -30,6 +86,9 @@ const Wrapper = styled.main`
   .desc {
     line-height: 2;
     max-width: 45em;
+  }
+  .linehr {
+    margin: 1rem 0;
   }
   .info {
     text-transform: capitalize;
