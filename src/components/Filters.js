@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import styled from 'styled-components'
 import { useFilterContext } from '../context/filter_context'
 import { getUniqueValues, formatPrice } from '../utils/helpers'
@@ -23,6 +23,7 @@ const Filters = () => {
   const categories = getUniqueValues(all_products, 'category')
   const companies = getUniqueValues(all_products, 'company')
   const colors = getUniqueValues(all_products, 'colors')
+  const rangeRef = useRef()
 
   return <Wrapper>
     <div className='content'>
@@ -97,7 +98,7 @@ const Filters = () => {
         <div className='form-control'>
           <h5>Price</h5>
           <p className='price'>{formatPrice(price)}</p>
-          <input type='range' name='price' onChange={updateFilters} min={min_price} max={max_price} />
+          <input type='range' ref={rangeRef} name='price' onChange={updateFilters} min={min_price} max={max_price} />
         </div>
         {/* End of price */}
         {/* Shipping */}
