@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 const CartTotals = () => {
   const {total_amount, shipping_fee} = useCartContext();
+  console.log(total_amount)
   return <Wrapper>
     <div>
       <article>
@@ -15,9 +16,9 @@ const CartTotals = () => {
           shipping fee : <span>{formatPrice(shipping_fee)}</span>
         </p>
         <hr/>
-        <p>
-          order total : {' '} <span>{formatPrice(total_amount)}</span>
-        </p>
+        <h4>
+          order total : {' '} <span>{formatPrice(total_amount + shipping_fee)}</span>
+        </h4>
       </article>
       <Link to="/checkout" className='btn'>
         Proceed to checkout
